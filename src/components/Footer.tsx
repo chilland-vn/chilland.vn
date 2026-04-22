@@ -7,15 +7,22 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-20">
         
         {/* Brand */}
-        <div className="space-y-6">
-          <Link to="/" className="flex items-center gap-3">
-             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-               <span className="text-brand-forest font-black text-xl">C</span>
-             </div>
-             <div className="flex flex-col">
-               <span className="text-xl font-bold tracking-tighter leading-none">Chilland.vn</span>
-               <span className="text-[9px] tracking-[0.2em] opacity-60 uppercase font-black">Giá trị tích luỹ niềm tin</span>
-             </div>
+        <div className="space-y-8">
+          <Link to="/" className="flex items-center gap-4 group">
+            <div className="w-12 h-12 flex items-center justify-center relative">
+              <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-white transform rotate-45">
+                <rect x="15" y="15" width="70" height="70" className="fill-white/10 stroke-brand-gold stroke-[2]" rx="8" />
+              </svg>
+              <span className="relative text-brand-gold font-serif font-black text-2xl tracking-tighter">C</span>
+            </div>
+            <div className="flex flex-col">
+              <h2 className="text-2xl font-black tracking-[0.2em] leading-none uppercase text-white">Chilland<span className="text-brand-gold">.vn</span></h2>
+              <div className="flex items-center gap-2 mt-2">
+                <div className="h-[1px] w-3 bg-brand-gold" />
+                <p className="text-[10px] font-serif italic font-bold tracking-[0.1em] text-brand-gold whitespace-nowrap">Giá trị tích luỹ niềm tin</p>
+                <div className="h-[1px] w-3 bg-brand-gold" />
+              </div>
+            </div>
           </Link>
           <p className="text-xs opacity-60 leading-relaxed font-medium">
             Nền tảng kết nối những giá trị thực trong bất động sản tại Khánh Hòa. Kiến tạo không gian sống, trao gửi trọn niềm tin.

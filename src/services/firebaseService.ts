@@ -127,6 +127,19 @@ export const getFeaturedBatDongSan = async (count = 6) => {
   return snapshot.docs.map(d => normalizeListing({ id: d.id, ...d.data() })).slice(0, count);
 };
 
+// Lấy sản phẩm theo danh mục
+export const getBatDongSanByCategory = async (category: string, count = 10) => {
+  console.log(`🔥 Fetching category: ${category}`);
+  const q = query(
+    collection(db, 'batdongsan'),
+    where('loaiCap1', '==', category),
+    where('trangThai', '==', 'Đang bán'),
+    orderBy('createdAt', 'desc')
+  );
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(d => normalizeListing({ id: d.id, ...d.data() })).slice(0, count);
+};
+
 // Import hàng loạt
 export const importBatchBatDongSan = async (items: any[]) => {
   console.log(`📦 Batch importing ${items.length} items...`);

@@ -27,13 +27,24 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white text-brand-ink border-b border-black/5 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
-          <Link to="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-brand-forest flex items-center justify-center">
-              <span className="text-brand-gold font-bold text-xl">C</span>
+          <Link to="/" className="flex items-center gap-4 group">
+            <div className="relative">
+              <div className="w-12 h-12 flex items-center justify-center">
+                {/* Luxury Diamond Emblem */}
+                <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-brand-forest group-hover:scale-110 transition-transform duration-500 transform rotate-45">
+                  <rect x="15" y="15" width="70" height="70" className="fill-brand-forest stroke-brand-gold stroke-[2]" rx="8" />
+                </svg>
+                <span className="relative text-brand-gold font-serif font-black text-2xl tracking-tighter">C</span>
+              </div>
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-brand-gold rounded-full border-2 border-white shadow-sm" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tighter leading-none uppercase">Chilland.vn</span>
-              <span className="text-[9px] uppercase tracking-[0.2em] text-gray-400">Giá trị tích luỹ niềm tin</span>
+              <h1 className="text-[22px] font-black tracking-[0.2em] leading-none uppercase text-brand-ink group-hover:text-brand-forest transition-colors">Chilland<span className="text-brand-gold">.vn</span></h1>
+              <div className="flex items-center gap-2 mt-1.5 px-0.5">
+                <div className="h-[1px] w-4 bg-brand-gold/40" />
+                <p className="text-[9px] font-serif italic font-bold tracking-[0.1em] text-brand-gold whitespace-nowrap">Giá trị tích luỹ niềm tin</p>
+                <div className="h-[1px] w-4 bg-brand-gold/40" />
+              </div>
             </div>
           </Link>
 

@@ -1,60 +1,55 @@
-import Banner from '../components/Banner';
 import SearchBar from '../components/SearchBar';
-import FeaturedListings from '../components/FeaturedListings';
-import BrokerIntro from '../components/BrokerIntro';
-import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
+import ListingSection from '../components/ListingSection';
+import ProjectShowcase from '../components/ProjectShowcase';
+import TrustFooter from '../components/TrustFooter';
+import FloatingCTA from '../components/FloatingCTA';
+import FeaturedNews from '../components/FeaturedNews';
 
 export default function Home() {
+  const sections = [
+    { category: "Nhà đất dân cư", title: "Nhà Đất Dân Cư", subtitle: "Tinh hoa bất động sản" },
+    { category: "Nhà đất khu đô thị", title: "Nhà Đất Khu Đô Thị", subtitle: "Tâm điểm các dự án quy mô" },
+    { category: "Căn hộ chung cư", title: "Căn Hộ Chung Cư", subtitle: "Trải nghiệm sống tầm cao mới" },
+    { category: "Khách sạn", title: "Khách Sạn & Resort", subtitle: "Cơ hội kinh doanh đắc lợi" },
+    { category: "Cho thuê BĐS", title: "Bất Động Sản Cho Thuê", subtitle: "Tạo ra dòng tiền bền vững" },
+  ];
+
   return (
-    <div className="space-y-24 pb-24">
-      {/* Hero Section */}
-      <div>
-        <Banner />
+    <div className="space-y-4 pb-24 relative">
+      {/* Floating Buttons for Mobile */}
+      <FloatingCTA />
+
+      {/* SearchBar at the top */}
+      <div className="pt-20 pb-10 text-center space-y-4">
+        <div className="space-y-2">
+          <span className="text-brand-gold uppercase tracking-[0.4em] text-[10px] font-black">Khởi đầu hành trình tinh hoa</span>
+          <h1 className="text-4xl md:text-5xl font-serif text-brand-forest italic">Tìm kiếm không gian sống của riêng bạn</h1>
+        </div>
         <SearchBar />
       </div>
 
-      {/* Featured Listings */}
-      <section className="max-w-7xl mx-auto px-4 lg:px-8">
-        <div className="flex justify-between items-end mb-8">
-          <div>
-            <h2 className="text-xs uppercase tracking-[0.3em] font-black text-brand-forest">Tin nổi bật - Nha Trang</h2>
-            <div className="w-12 h-1 bg-brand-gold mt-2"></div>
-          </div>
-          <Link to="/danh-muc/Nhà đất dân cư" className="text-[10px] uppercase font-black text-brand-gold border-b-2 border-brand-gold pb-1 hover:text-brand-forest hover:border-brand-forest transition-all">
-            Xem tất cả
-          </Link>
-        </div>
-        <FeaturedListings />
-      </section>
+      {/* Projects Showcase */}
+      <ProjectShowcase />
 
-      {/* Video Section */}
-      <section className="luxury-gradient py-24 text-white">
-        <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <span className="text-brand-gold uppercase tracking-widest text-sm font-bold">Video Review</span>
-            <h2 className="text-5xl font-serif mt-4 mb-8">Trải nghiệm thực tế dự án</h2>
-            <p className="text-lg opacity-80 leading-relaxed mb-10 italic">
-               "Một góc nhìn chân thực hơn về không gian sống và tiềm năng đầu tư. Chúng tôi trực tiếp đi khảo sát từng ngõ ngách để mang lại thông tin chính xác nhất."
-            </p>
-          </div>
-          <div className="aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl relative group">
-             <iframe 
-               width="100%" 
-               height="100%" 
-               src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-               title="YouTube video player" 
-               frameBorder="0" 
-               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-               allowFullScreen
-             ></iframe>
-             <div className="absolute inset-0 bg-brand-forest/10 pointer-events-none group-hover:opacity-0 transition-opacity"></div>
-          </div>
-        </div>
-      </section>
+      {/* Categorized Listings */}
+      <div>
+        {sections.map((section) => (
+          <ListingSection 
+            key={section.category}
+            category={section.category}
+            title={section.title}
+            subtitle={section.subtitle}
+          />
+        ))}
+      </div>
 
-      {/* Broker Intro */}
-      <BrokerIntro />
+      {/* Featured News Section */}
+      <FeaturedNews />
+
+      {/* Combined Trust Section at the bottom */}
+      <div className="pt-20">
+        <TrustFooter />
+      </div>
     </div>
   );
 }
