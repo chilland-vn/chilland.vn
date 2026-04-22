@@ -1,0 +1,40 @@
+{
+  "entities": {
+    "Listing": {
+      "title": "Bất động sản",
+      "description": "Thông tin chi tiết một bất động sản",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "maSanPham": { "type": "string", "description": "Mã sản phẩm" },
+        "loaiCap1": { "type": "string", "description": "Loại cấp 1" },
+        "loaiCap2": { "type": "string", "description": "Loại cấp 2" },
+        "tieuDe": { "type": "string", "description": "Tiêu đề" },
+        "noiDung": { "type": "string", "description": "Mô tả chi tiết" },
+        "gia": { "type": "number", "description": "Giá" },
+        "dienTich": { "type": "number", "description": "Diện tích (m2)" },
+        "huong": { "type": "string", "description": "Hướng" },
+        "khuVuc": { "type": "string", "description": "Khu vực" },
+        "diaChi": { "type": "string", "description": "Địa chỉ" },
+        "phapLy": { "type": "string", "description": "Pháp lý" },
+        "trangThai": { "type": "string", "enum": ["Đang bán", "Đã bán", "Ngừng giao dịch"] },
+        "dacDiemNoiBat": { "type": "array" },
+        "danhSachAnh": { "type": "array" },
+        "anhDaiDien": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "googleMap": { "type": "string" },
+        "nguoiPhuTrach": { "type": "string" },
+        "soDienThoai": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["maSanPham", "loaiCap1", "tieuDe", "gia", "dienTich", "khuVuc"]
+    }
+  },
+  "firestore": {
+    "/batdongsan/{listingId}": {
+      "schema": "Listing",
+      "description": "Danh sách bất động sản"
+    }
+  }
+}

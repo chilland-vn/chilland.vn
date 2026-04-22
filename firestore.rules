@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { 
+      return isSignedIn() && (
+        request.auth.token.email == 'gianglh.th@gmail.com' && request.auth.token.email_verified == true
+      );
+    }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    function isValidListing(data) {
+      return data.maSanPham is string && data.maSanPham.size() < 50
+          && data.tieuDe is string && data.tieuDe.size() < 200
+          && data.gia is number && data.gia >= 0
+          && data.dienTich is number && data.dienTich > 0
+          && data.loaiCap1 is string
+          && data.loaiCap2 is string
+          && data.khuVuc is string;
+    }
+
+    function isValidContact(data) {
+      return data.hoTen is string && data.hoTen.size() > 1 && data.hoTen.size() < 100
+          && data.soDienThoai is string && data.soDienThoai.size() >= 10 && data.soDienThoai.size() <= 15;
+    }
+
+    // 1. Listings
+    match /batdongsan/{listingId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidListing(incoming()) && isValidId(listingId);
+      allow update: if isAdmin() && isValidListing(incoming())
+                   && incoming().maSanPham == existing().maSanPham; // Immutable code
+      allow delete: if isAdmin();
+    }
+
+    // 2. Contacts (Leads)
+    match /khachhang/{contactId} {
+      allow create: if isValidContact(incoming()) && isValidId(contactId);
+      allow read, update, delete: if isAdmin();
+    }
+
+    // 3. Settings
+    match /cauhinhweb/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
